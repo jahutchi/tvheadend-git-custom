@@ -4,7 +4,7 @@
 
 _gitname='tvheadend-git'
 pkgname=tvheadend-git
-pkgver=4.3.r2028.g1c65e8b0f
+pkgver=4.3.r2040.g604d81a29
 pkgrel=1
 pkgdesc="TV streaming server for Linux"
 arch=('i686' 'x86_64' 'arm' 'armv6h' 'armv7h' 'aarch64')
@@ -12,7 +12,6 @@ url="https://tvheadend.org/"
 license=('GPL3')
 depends=(
   'avahi'
-  'ffmpeg4.4'
   'libavresample'
   'libdvbcsa'
   'libfdk-aac'
@@ -44,13 +43,11 @@ source=(
   tvheadend.service
   tmpfile.conf
   user.conf
-  0001-use-ffmpeg4.4.patch
 )
 sha512sums=('SKIP'
-            'd29662ee47f2d0da98d444819f730a8c487999454d60d7397b0f67068300ab5111ffce18befc9fdef5ff8fa1925213716837ea44808fb934197e4a56f98de8a7'
-            '1080c8a2530d1f16ab5304cdd81c9c9da23b281e44a4874f4921905c843d876831214af481f9be91a74291ed4a6a10684dbdfb8f926b51bbb6895b92d493b201'
-            '5e0475cfe1f915bd3269ba3e9e0ca6cc7e492988bfd4f1feafcbbd3e8b0276c228f0b08a4116f3213d12c0ea940eff0dc71601a6e6ddcda934964cf51a665539'
-            'f381843e870723bffe34648e6427a5bbfb85076f59b2def1e89b58bc68db93f06dbd6fe20b508bb72daecf0e832094beae769425c121c632a9d017edd00b8575')
+            '033d41d83e875e2e9d0c88abfa8c5480f203548528aaad21e98771d1abc1e54ed0e5a54dd20f19a3e6b0dfcd27c520ae076f8fba7d85c3d855e455be254bf752'
+            'f8139121355cc1f6dc8003897cad0223127648920146c6064c0c70a04295737a8f4d79a670edfc65231bf86b07a42db054f2887bbe50dca8686fd03ac5c79943'
+            '78cefaabbe8becd52f40bfceb1105f6fd10be39e09e1259858df8dadadc77870439a403f3f5ddf6f29b078e07d48c03aa05cb5a6200486bc0fb6300d344da348')
 
 pkgver() {
   cd "${srcdir}/${_gitname}"
@@ -59,7 +56,6 @@ pkgver() {
 
 prepare() {
   cd "${srcdir}/${_gitname}"
-  patch -Np1 -i ../0001-use-ffmpeg4.4.patch
 }
 
 build() {
@@ -77,7 +73,7 @@ build() {
     --enable-zlib \
     --enable-pngquant \
     --enable-libav \
-    --disable-ffmpeg_static --enable-ffmpeg \
+    --enable-ffmpeg_static \
     --disable-libx264_static --enable-libx264 \
     --disable-libx265_static --enable-libx265 \
     --disable-libvpx_static --enable-libvpx \
