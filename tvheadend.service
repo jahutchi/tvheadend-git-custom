@@ -7,8 +7,8 @@ Type=forking
 RuntimeDirectory=tvheadend
 PrivateTmp=yes
 Environment=PID_DIR=/run/tvheadend
-User=tvheadend
-Group=tvheadend
+User=downloads
+Group=downloads
 ExecStart=/usr/bin/tvheadend -c /etc/tvheadend -f -p ${PID_DIR}/tvheadend.pid -C
 Restart=always
 
