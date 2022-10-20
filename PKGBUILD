@@ -39,7 +39,7 @@ options=('!strip' 'emptydirs')
 provides=('tvheadend')
 conflicts=('tvheadend')
 source=(
-  "${_gitname}::git+https://github.com/tvheadend/tvheadend.git"
+  "${_gitname}::git+https://github.com/jahutchi/tvheadend.git"
   tvheadend.service
   tmpfile.conf
   user.conf
