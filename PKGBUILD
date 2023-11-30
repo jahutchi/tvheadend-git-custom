@@ -4,7 +4,7 @@
 # Contributor: Benjamin Hedrich <kiwisauce (a) pagenotfound (dot) de>
 
 pkgname=tvheadend-git
-pkgver=4.3.r2154.gec56067
+pkgver=4.3.r2167.g2d8cf76
 pkgrel=1
 pkgdesc='TV streaming server and DVR'
 #arch=(x86_64)
@@ -24,9 +24,9 @@ source=("$pkgname::git+https://github.com/jahutchi/tvheadend.git"
         tvheadend.service
         user.conf)
 sha256sums=('SKIP'
-            'b01fa913421e67e40bc1aa5da079e30cb1d8c20913133ded1ad651d6ce84b9b6'
-            'a8e95cd2ec5626a47f49c0aa1f8524d6e155809cfbf6504b9a1484afdf62cfb7'
-            '35786e211d4cbf6de213f28e7382378f27f3bef17458e8533ad43fed06e7f202')
+            'b5682442484f5604b5be8d21b186c39187ac4792540f298dbbb7bc9d952b0135'
+            'eb1d4fdbd51a48c997d08dc43c732dee6099c170e0633a010066402e6ad5a8a3'
+            'e513b752ff665ef917d33df12d278c3efd85e814eadfc8974d540f16e9e2c0d5')
 
 pkgver() {
   git -C $pkgname describe --long --abbrev=7 | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
