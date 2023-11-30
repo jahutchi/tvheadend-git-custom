@@ -11,8 +11,7 @@ pkgdesc='TV streaming server and DVR'
 arch=(aarch64 arm armv6h armv7h i686 x86_64)
 url=https://tvheadend.org/
 license=(GPL3)
-# NOTE: ffmpeg 6 is not supported (https://github.com/tvheadend/tvheadend/pull/1522)
-depends=(avahi ffmpeg4.4 libdvbcsa libfdk-aac libhdhomerun libogg libtheora libvorbis libvpx
+depends=(avahi ffmpeg libdvbcsa libfdk-aac libhdhomerun libogg libtheora libvorbis libvpx
          openssl opus pcre2 pngquant uriparser x264 x265)
 makedepends=(git python)
 optdepends=('xmltv: alternative source of programme listings')
@@ -35,8 +34,6 @@ pkgver() {
 
 build() {
   cd $pkgname
-
-  export PKG_CONFIG_PATH=/usr/lib/ffmpeg4.4/pkgconfig
 
   ./configure \
     --datadir=/var/lib \
