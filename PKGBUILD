@@ -19,7 +19,7 @@ optdepends=('xmltv: alternative source of programme listings')
 options=(!lto !strip emptydirs)
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
-source=("$pkgname::git+https://github.com/tvheadend/tvheadend.git"
+source=("$pkgname::git+https://github.com/jahutchi/tvheadend.git"
         tmpfile.conf
         tvheadend.service
         user.conf)
