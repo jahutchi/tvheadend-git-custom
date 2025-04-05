@@ -36,7 +36,7 @@ build() {
 
   ./configure \
     --datadir=/var/lib \
-    --disable-ffmpeg_static \
+    --enable-ffmpeg_static \
     --disable-hdhomerun_static \
     --disable-libfdkaac_static \
     --disable-libogg_static \
