@@ -4,28 +4,33 @@
 # Contributor: Benjamin Hedrich <kiwisauce (a) pagenotfound (dot) de>
 
 pkgname=tvheadend-git
-pkgver=4.3.r2314.gaf5a7be
+pkgver=4.3.r2653.ge48cdd3
 pkgrel=1
 pkgdesc='TV streaming server and DVR'
 #arch=(x86_64)
 arch=(aarch64 arm armv6h armv7h i686 x86_64)
-url=https://tvheadend.org/
-license=(GPL3)
-depends=(avahi ffmpeg libdvbcsa libfdk-aac libhdhomerun libogg libtheora libvorbis libvpx
-         openssl opus pcre2 pngquant uriparser x264 x265)
+url=https://tvheadend.org
+license=(GPL-3.0-or-later)
+depends=(
+  avahi ffmpeg libiconv libdvbcsa libfdk-aac libogg libtheora libvorbis libvpx
+  openssl opus pcre2 pngquant uriparser x264 x265)
 makedepends=(git python)
-optdepends=('xmltv: alternative source of programme listings')
+optdepends=(
+  'libhdhomerun: HDHomeRun support'
+  'xmltv: alternative source of programme listings')
 options=(!buildflags !strip emptydirs)
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
-source=("$pkgname::git+https://github.com/jahutchi/tvheadend.git"
-        tmpfile.conf
-        tvheadend.service
-        user.conf)
-sha256sums=('SKIP'
-            'b5682442484f5604b5be8d21b186c39187ac4792540f298dbbb7bc9d952b0135'
-            'eb1d4fdbd51a48c997d08dc43c732dee6099c170e0633a010066402e6ad5a8a3'
-            'e513b752ff665ef917d33df12d278c3efd85e814eadfc8974d540f16e9e2c0d5')
+source=(
+  "$pkgname::git+https://github.com/jahutchi/tvheadend.git#branch=custom-nov2025"
+  tmpfile.conf
+  tvheadend.service
+  user.conf)
+sha256sums=(
+  'SKIP'
+  'b5682442484f5604b5be8d21b186c39187ac4792540f298dbbb7bc9d952b0135'
+  'eb1d4fdbd51a48c997d08dc43c732dee6099c170e0633a010066402e6ad5a8a3'
+  'e513b752ff665ef917d33df12d278c3efd85e814eadfc8974d540f16e9e2c0d5')
 
 pkgver() {
   git -C $pkgname describe --long --abbrev=7 | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
@@ -33,6 +38,8 @@ pkgver() {
 
 build() {
   cd $pkgname
+
+  export CFLAGS+=' -Wno-error=discarded-qualifiers -Wno-error=format-truncation -Wno-error=unused-but-set-variable'
 
   ./configure \
     --datadir=/var/lib \
@@ -51,7 +58,7 @@ build() {
     --enable-pngquant \
     --enable-vaapi \
     --enable-zlib \
-    --mandir=/usr/share/man/man1 \
+    --mandir=/usr/share/man \
     --prefix=/usr \
     --python=python3
 
